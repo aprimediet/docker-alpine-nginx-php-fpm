@@ -1,2 +1,0 @@
-#!/usr/bin/with-contenv sh
-php-fpm7 -F -R -c /etc/php7/php-fpm.conf

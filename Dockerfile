@@ -1,18 +1,22 @@
-FROM aprimediet/alpine-nginx:latest
+FROM aprimediet/alpine-nginx:3.15
 LABEL maintainer="<Muhamad Aditya Prima> aprimediet@gmail.com"
 
-# INSTALL PHP7
-RUN apk update && apk upgrade && \
-    apk add --update --no-cache \
-    git php7 php7-gd php7-xsl php7-zip \
-    php7-curl php7-zlib php7-json php7-pgsql \
-    php7-mcrypt php7-tidy php7-dom php7-redis \
-    php7-openssl php7-fpm php7-fileinfo php7-tokenizer \
-    php7-xmlwriter php7-xml php7-pdo php7-pdo_pgsql \
-    composer
+# INSTALL php5
+# RUN apk update && apk upgrade && \
+RUN apk add --update --no-cache \
+    git php8 php8-bz2 php8-bcmath php8-brotli php8-common \
+    php8-ctype php8-curl php8-dbg php8-dev \
+    php8-dom php8-embed php8-exif php8-fileinfo \
+    php8-fpm php8-ftp php8-gd php8-gettext php8-gmp \
+    php8-iconv php8-intl php8-ldap php8-openssl php8-pear \
+    php8-pspell php8-session php8-simplexml php8-snmp php8-soap \
+    php8-sockets php8-tidy php8-tokenizer php8-xml php8-xmlreader \
+    php8-xmlwriter php8-xsl php8-zip
 
 # COPY Configuration File
 RUN mkdir -p /var/run/php
+RUN mkdir -p /var/log/php8
+RUN touch /var/log/php8/error.log
 ADD etc /etc
 ADD usr /usr
 
