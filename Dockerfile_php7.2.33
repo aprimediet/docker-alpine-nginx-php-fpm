@@ -1,0 +1,27 @@
+ARG ALPINE_VERSION=3.9
+
+FROM aprimediet/nginx:alpine-${ALPINE_VERSION}
+LABEL maintainer="<Muhamad Aditya Prima> aprimediet@gmail.com"
+
+# INSTALL php5
+# RUN apk update && apk upgrade && \
+RUN apk add --update --no-cache \
+    git php7 php7-bz2 php7-bcmath php7-common \
+    php7-ctype php7-curl php7-dev \
+    php7-dom php7-embed php7-exif php7-fileinfo \
+    php7-fpm php7-ftp php7-gd php7-gettext php7-gmp \
+    php7-iconv php7-intl php7-ldap php7-openssl php7-pear \
+    php7-pspell php7-session php7-simplexml php7-snmp php7-soap \
+    php7-sockets php7-tidy php7-tokenizer php7-xml php7-xmlreader \
+    php7-xmlwriter php7-xsl php7-zip
+#php7-dbg
+
+# COPY Configuration File
+RUN mkdir -p /var/run/php
+RUN mkdir -p /var/log/php7
+RUN touch /var/log/php7/error.log
+ADD ./etc/nginx /etc/nginx
+ADD ./etc/services.d/php-fpm7 /etc/services.d/php-fpm7
+ADD usr /usr
+
+EXPOSE 80
