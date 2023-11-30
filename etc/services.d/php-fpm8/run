@@ -1,2 +1,0 @@
-#!/command/with-contenv sh
-php-fpm8 -F -R -c /etc/php8/php-fpm.conf
